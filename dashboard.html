@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Your LokSahay citizen dashboard."
+    >
+
+    <title>Dashboard | LokSahay</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           DASHBOARD PAGE
+           ===================================================== */
+
+        .dashboard-page {
+            min-height: 100vh;
+
+            background: #f6f8fb;
+
+            color: #263238;
+        }
+
+        /* =====================================================
+           NAVBAR
+           ===================================================== */
+
+        .dashboard-nav {
+            min-height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+
+            background: #ffffff;
+
+            border-bottom: 1px solid #e7ebf0;
+
+            position: sticky;
+            top: 0;
+
+            z-index: 100;
+        }
+
+        .dashboard-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            color: #14213d;
+
+            font-size: 1.05rem;
+            font-weight: 800;
+        }
+
+        .dashboard-brand img {
+            width: 42px;
+            height: 42px;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+        .dashboard-nav-links {
+            display: flex;
+            align-items: center;
+
+            gap: 25px;
+        }
+
+        .dashboard-nav-links a {
+            color: #667085;
+
+            font-size: 0.78rem;
+            font-weight: 700;
+
+            transition: color 0.3s ease;
+        }
+
+        .dashboard-nav-links a:hover {
+            color: #f28c28;
+        }
+
+        .nav-report-button {
+            padding: 10px 17px;
+
+            border-radius: 8px;
+
+            background: #f28c28;
+
+            color: #ffffff !important;
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .nav-report-button:hover {
+            background: #d96f0b;
+
+            transform: translateY(-1px);
+        }
+
+        /* =====================================================
+           MAIN CONTAINER
+           ===================================================== */
+
+        .dashboard-container {
+            width: min(100%, 1200px);
+
+            margin: 0 auto;
+
+            padding: 45px 25px 70px;
+        }
+
+        /* =====================================================
+           WELCOME
+           ===================================================== */
+
+        .dashboard-welcome {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+
+            gap: 25px;
+
+            margin-bottom: 32px;
+        }
+
+        .welcome-eyebrow {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #16834b;
+
+            font-size: 0.7rem;
+            font-weight: 800;
+
+            letter-spacing: 1.2px;
+
+            text-transform: uppercase;
+        }
+
+        .dashboard-welcome h1 {
+            margin-bottom: 8px;
+
+            color: #14213d;
+
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+
+            letter-spacing: -1px;
+        }
+
+        .dashboard-welcome p {
+            color: #667085;
+
+            font-size: 0.84rem;
+        }
+
+        .welcome-action {
+            flex-shrink: 0;
+
+            padding: 12px 20px;
+
+            border-radius: 9px;
+
+            background: #f28c28;
+
+            color: #ffffff;
+
+            font-size: 0.78rem;
+            font-weight: 800;
+
+            box-shadow:
+                0 7px 18px rgba(242, 140, 40, 0.18);
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .welcome-action:hover {
+            background: #d96f0b;
+
+            transform: translateY(-2px);
+        }
+
+        /* =====================================================
+           STATISTICS
+           ===================================================== */
+
+        .dashboard-stats {
+            display: grid;
+
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 16px;
+
+            margin-bottom: 32px;
+        }
+
+        .stat-card {
+            padding: 22px;
+
+            background: #ffffff;
+
+            border: 1px solid #e7ebf0;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 7px 22px rgba(20, 33, 61, 0.04);
+        }
+
+        .stat-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 13px;
+        }
+
+        .stat-label {
+            color: #667085;
+
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .stat-icon {
+            width: 34px;
+            height: 34px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #fff1e3;
+
+            color: #f28c28;
+
+            font-size: 0.9rem;
+        }
+
+        .stat-card:nth-child(2) .stat-icon {
+            background: #eaf7ef;
+
+            color: #16834b;
+        }
+
+        .stat-card:nth-child(3) .stat-icon {
+            background: #edf2f8;
+
+            color: #365779;
+        }
+
+        .stat-card:nth-child(4) .stat-icon {
+            background: #f0edf9;
+
+            color: #6d5cae;
+        }
+
+        .stat-number {
+            color: #14213d;
+
+            font-size: 1.65rem;
+            font-weight: 800;
+
+            letter-spacing: -0.5px;
+        }
+
+        /* =====================================================
+           CONTENT GRID
+           ===================================================== */
+
+        .dashboard-grid {
+            display: grid;
+
+            grid-template-columns: minmax(0, 1.65fr) minmax(280px, 0.8fr);
+
+            gap: 22px;
+
+            align-items: start;
+        }
+
+        .dashboard-card {
+            background: #ffffff;
+
+            border: 1px solid #e7ebf0;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 7px 22px rgba(20, 33, 61, 0.04);
+
+            overflow: hidden;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 21px 22px;
+
+            border-bottom: 1px solid #e7ebf0;
+        }
+
+        .card-header h2 {
+            color: #14213d;
+
+            font-size: 0.98rem;
+            font-weight: 800;
+        }
+
+        .card-header a {
+            color: #16834b;
+
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           ISSUE LIST
+           ===================================================== */
+
+        .issue-list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .issue-item {
+            padding: 20px 22px;
+
+            display: flex;
+            align-items: center;
+
+            gap: 16px;
+
+            border-bottom: 1px solid #eef0f3;
+
+            transition: background 0.3s ease;
+        }
+
+        .issue-item:last-child {
+            border-bottom: none;
+        }
+
+        .issue-item:hover {
+            background: #fafbfc;
+        }
+
+        .issue-category-icon {
+            width: 42px;
+            height: 42px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #fff1e3;
+
+            color: #f28c28;
+
+            font-size: 0.95rem;
+        }
+
+        .issue-item:nth-child(2) .issue-category-icon {
+            background: #eaf7ef;
+
+            color: #16834b;
+        }
+
+        .issue-item:nth-child(3) .issue-category-icon {
+            background: #edf2f8;
+
+            color: #365779;
+        }
+
+        .issue-content {
+            flex: 1;
+
+            min-width: 0;
+        }
+
+        .issue-content h3 {
+            margin-bottom: 5px;
+
+            color: #263238;
+
+            font-size: 0.82rem;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            text-overflow: ellipsis;
+        }
+
+        .issue-content p {
+            color: #98a2b3;
+
+            font-size: 0.68rem;
+        }
+
+        .issue-status {
+            flex-shrink: 0;
+
+            padding: 6px 10px;
+
+            border-radius: 20px;
+
+            font-size: 0.63rem;
+            font-weight: 800;
+        }
+
+        .status-progress {
+            background: #fff3df;
+
+            color: #c56c0a;
+        }
+
+        .status-resolved {
+            background: #eaf7ef;
+
+            color: #16834b;
+        }
+
+        .status-verified {
+            background: #edf2f8;
+
+            color: #365779;
+        }
+
+        /* =====================================================
+           EMPTY / DEMO NOTE
+           ===================================================== */
+
+        .prototype-note {
+            margin: 0 22px 22px;
+
+            padding: 13px 15px;
+
+            border-radius: 9px;
+
+            background: #f8fafc;
+
+            color: #98a2b3;
+
+            font-size: 0.68rem;
+
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           QUICK ACTIONS
+           ===================================================== */
+
+        .quick-actions {
+            padding: 20px;
+        }
+
+        .quick-action {
+            display: flex;
+            align-items: center;
+
+            gap: 12px;
+
+            padding: 14px;
+
+            margin-bottom: 10px;
+
+            border: 1px solid #e7ebf0;
+
+            border-radius: 11px;
+
+            background: #ffffff;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .quick-action:last-child {
+            margin-bottom: 0;
+        }
+
+        .quick-action:hover {
+            transform: translateY(-2px);
+
+            border-color: #d8dee6;
+
+            box-shadow:
+                0 6px 16px rgba(20, 33, 61, 0.06);
+        }
+
+        .quick-icon {
+            width: 36px;
+            height: 36px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 9px;
+
+            background: #fff1e3;
+
+            color: #f28c28;
+
+            font-size: 0.85rem;
+        }
+
+        .quick-action:nth-child(2) .quick-icon {
+            background: #eaf7ef;
+
+            color: #16834b;
+        }
+
+        .quick-action:nth-child(3) .quick-icon {
+            background: #edf2f8;
+
+            color: #365779;
+        }
+
+        .quick-text {
+            display: flex;
+            flex-direction: column;
+
+            gap: 3px;
+        }
+
+        .quick-text strong {
+            color: #263238;
+
+            font-size: 0.76rem;
+        }
+
+        .quick-text span {
+            color: #98a2b3;
+
+            font-size: 0.65rem;
+        }
+
+        /* =====================================================
+           COMMUNITY CARD
+           ===================================================== */
+
+        .community-card {
+            margin-top: 22px;
+
+            padding: 22px;
+
+            border-radius: 16px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #14213d,
+                    #193453
+                );
+
+            color: #ffffff;
+        }
+
+        .community-card .small-label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #ffad5c;
+
+            font-size: 0.67rem;
+            font-weight: 800;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+        }
+
+        .community-card h2 {
+            margin-bottom: 9px;
+
+            font-size: 1.05rem;
+        }
+
+        .community-card p {
+            margin-bottom: 17px;
+
+            color: rgba(255, 255, 255, 0.65);
+
+            font-size: 0.7rem;
+
+            line-height: 1.6;
+        }
+
+        .community-link {
+            display: inline-block;
+
+            padding: 9px 14px;
+
+            border: 1px solid rgba(255, 255, 255, 0.18);
+
+            border-radius: 8px;
+
+            color: #ffffff;
+
+            font-size: 0.68rem;
+            font-weight: 700;
+
+            transition:
+                background 0.3s ease,
+                border-color 0.3s ease;
+        }
+
+        .community-link:hover {
+            background: rgba(255, 255, 255, 0.08);
+
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .dashboard-footer {
+            padding-top: 40px;
+
+            text-align: center;
+
+            color: #98a2b3;
+
+            font-size: 0.68rem;
+        }
+
+        .dashboard-footer a {
+            color: #16834b;
+
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 900px) {
+
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .dashboard-nav {
+                padding: 0 20px;
+            }
+
+            .dashboard-nav-links a:not(.nav-report-button) {
+                display: none;
+            }
+
+            .dashboard-container {
+                padding: 35px 18px 55px;
+            }
+
+            .dashboard-welcome {
+                align-items: flex-start;
+
+                flex-direction: column;
+            }
+
+            .welcome-action {
+                width: 100%;
+
+                text-align: center;
+            }
+
+            .dashboard-stats {
+                grid-template-columns: 1fr 1fr;
+
+                gap: 10px;
+            }
+
+            .stat-card {
+                padding: 17px;
+            }
+
+            .stat-number {
+                font-size: 1.35rem;
+            }
+
+            .issue-item {
+                align-items: flex-start;
+
+                padding: 17px;
+            }
+
+            .issue-status {
+                font-size: 0.58rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-brand {
+                font-size: 0.92rem;
+            }
+
+            .dashboard-brand img {
+                width: 36px;
+                height: 36px;
+            }
+
+            .issue-content h3 {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="dashboard-page">
+
+        <!-- =================================================
+             NAVBAR
+             ================================================= -->
+
+        <nav class="dashboard-nav">
+
+            <a
+                href="index.html"
+                class="dashboard-brand"
+            >
+
+                <img
+                    src="assets/logo.png"
+                    alt="LokSahay logo"
+                >
+
+                <span>LokSahay</span>
+
+            </a>
+
+
+            <div class="dashboard-nav-links">
+
+                <a href="index.html">
+                    Home
+                </a>
+
+                <a href="report.html">
+                    Report Issue
+                </a>
+
+                <a href="track.html">
+                    Track Issue
+                </a>
+
+                <a
+                    href="report.html"
+                    class="nav-report-button"
+                >
+                    + Report
+                </a>
+
+            </div>
+
+        </nav>
+
+
+        <!-- =================================================
+             MAIN
+             ================================================= -->
+
+        <main class="dashboard-container">
+
+
+            <!-- =================================================
+                 WELCOME
+                 ================================================= -->
+
+            <section class="dashboard-welcome">
+
+                <div>
+
+                    <span class="welcome-eyebrow">
+                        Citizen Dashboard
+                    </span>
+
+                    <h1>
+                        Welcome to LokSahay
+                    </h1>
+
+                    <p>
+                        Keep track of the civic issues you've reported.
+                    </p>
+
+                </div>
+
+                <a
+                    href="report.html"
+                    class="welcome-action"
+                >
+                    + Report an Issue
+                </a>
+
+            </section>
+
+
+            <!-- =================================================
+                 STATISTICS
+                 ================================================= -->
+
+            <section class="dashboard-stats">
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <span class="stat-label">
+                            Total Reports
+                        </span>
+
+                        <span class="stat-icon">
+                            📋
+                        </span>
+
+                    </div>
+
+                    <div class="stat-number">
+                        12
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <span class="stat-label">
+                            Resolved
+                        </span>
+
+                        <span class="stat-icon">
+                            ✓
+                        </span>
+
+                    </div>
+
+                    <div class="stat-number">
+                        7
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <span class="stat-label">
+                            In Progress
+                        </span>
+
+                        <span class="stat-icon">
+                            ↻
+                        </span>
+
+                    </div>
+
+                    <div class="stat-number">
+                        3
+                    </div>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <div class="stat-top">
+
+                        <span class="stat-label">
+                            Verified
+                        </span>
+
+                        <span class="stat-icon">
+                            ✓
+                        </span>
+
+                    </div>
+
+                    <div class="stat-number">
+                        2
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CONTENT
+                 ================================================= -->
+
+            <div class="dashboard-grid">
+
+
+                <!-- =================================================
+                     MY REPORTS
+                     ================================================= -->
+
+                <section class="dashboard-card">
+
+                    <div class="card-header">
+
+                        <h2>
+                            My Recent Reports
+                        </h2>
+
+                        <a href="track.html">
+                            Track Issues
+                        </a>
+
+                    </div>
+
+
+                    <div class="issue-list">
+
+
+                        <!-- Issue 1 -->
+
+                        <article class="issue-item">
+
+                            <div class="issue-category-icon">
+                                🛣️
+                            </div>
+
+                            <div class="issue-content">
+
+                                <h3>
+                                    Road Damage Near Main Market
+                                </h3>
+
+                                <p>
+                                    LS-1024 • Roads & Potholes
+                                </p>
+
+                            </div>
+
+                            <span class="issue-status status-progress">
+                                In Progress
+                            </span>
+
+                        </article>
+
+
+                        <!-- Issue 2 -->
+
+                        <article class="issue-item">
+
+                            <div class="issue-category-icon">
+                                🗑️
+                            </div>
+
+                            <div class="issue-content">
+
+                                <h3>
+                                    Garbage Collection Point Overflow
+                                </h3>
+
+                                <p>
+                                    LS-1018 • Garbage & Waste
+                                </p>
+
+                            </div>
+
+                            <span class="issue-status status-resolved">
+                                Resolved
+                            </span>
+
+                        </article>
+
+
+                        <!-- Issue 3 -->
+
+                        <article class="issue-item">
+
+                            <div class="issue-category-icon">
+                                💡
+                            </div>
+
+                            <div class="issue-content">
+
+                                <h3>
+                                    Broken Streetlight
+                                </h3>
+
+                                <p>
+                                    LS-1012 • Streetlights
+                                </p>
+
+                            </div>
+
+                            <span class="issue-status status-verified">
+                                Verified
+                            </span>
+
+                        </article>
+
+                    </div>
+
+
+                    <div class="prototype-note">
+
+                        Prototype data shown for demonstration.
+                        These reports will later be loaded dynamically
+                        from the LokSahay backend.
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     RIGHT SIDEBAR
+                     ================================================= -->
+
+                <aside>
+
+
+                    <!-- Quick Actions -->
+
+                    <section class="dashboard-card">
+
+                        <div class="card-header">
+
+                            <h2>
+                                Quick Actions
+                            </h2>
+
+                        </div>
+
+
+                        <div class="quick-actions">
+
+                            <a
+                                href="report.html"
+                                class="quick-action"
+                            >
+
+                                <span class="quick-icon">
+                                    +
+                                </span>
+
+                                <span class="quick-text">
+
+                                    <strong>
+                                        Report an Issue
+                                    </strong>
+
+                                    <span>
+                                        Submit a new civic complaint
+                                    </span>
+
+                                </span>
+
+                            </a>
+
+
+                            <a
+                                href="track.html"
+                                class="quick-action"
+                            >
+
+                                <span class="quick-icon">
+                                    🔎
+                                </span>
+
+                                <span class="quick-text">
+
+                                    <strong>
+                                        Track an Issue
+                                    </strong>
+
+                                    <span>
+                                        Check your complaint status
+                                    </span>
+
+                                </span>
+
+                            </a>
+
+
+                            <a
+                                href="index.html"
+                                class="quick-action"
+                            >
+
+                                <span class="quick-icon">
+                                    🏠
+                                </span>
+
+                                <span class="quick-text">
+
+                                    <strong>
+                                        Visit Home
+                                    </strong>
+
+                                    <span>
+                                        Learn more about LokSahay
+                                    </span>
+
+                                </span>
+
+                            </a>
+
+                        </div>
+
+                    </section>
+
+
+                    <!-- Community Card -->
+
+                    <section class="community-card">
+
+                        <span class="small-label">
+                            Your Voice Matters
+                        </span>
+
+                        <h2>
+                            Help improve your community.
+                        </h2>
+
+                        <p>
+                            Every responsible report can help
+                            identify problems and contribute to
+                            better civic services.
+                        </p>
+
+                        <a
+                            href="report.html"
+                            class="community-link"
+                        >
+                            Report a Problem →
+
+                        </a>
+
+                    </section>
+
+                </aside>
+
+            </div>
+
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================= -->
+
+            <footer class="dashboard-footer">
+
+                <p>
+                    LokSahay — Empowering citizens to report,
+                    track and improve civic issues.
+                </p>
+
+                <p>
+                    <a href="index.html">
+                        Home
+                    </a>
+                    &nbsp; • &nbsp;
+                    <a href="report.html">
+                        Report Issue
+                    </a>
+                    &nbsp; • &nbsp;
+                    <a href="track.html">
+                        Track Issue
+                    </a>
+                </p>
+
+            </footer>
+
+        </main>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Report a civic issue through LokSahay."
+    >
+
+    <title>Report an Issue | LokSahay</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           REPORT PAGE
+           Page-specific styles
+           ===================================================== */
+
+        .report-page {
+            min-height: 100vh;
+
+            padding: 40px 20px 70px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fafc 0%,
+                    #ffffff 55%,
+                    #eef8f2 100%
+                );
+        }
+
+        .report-container {
+            width: min(100%, 1050px);
+
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           TOP BAR
+           ===================================================== */
+
+        .report-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 35px;
+        }
+
+        .report-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            color: #14213d;
+
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .report-brand img {
+            width: 45px;
+            height: 45px;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+        .back-home {
+            color: #667085;
+
+            font-size: 0.8rem;
+            font-weight: 700;
+
+            transition: color 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #f28c28;
+        }
+
+        /* =====================================================
+           HEADER
+           ===================================================== */
+
+        .report-heading {
+            text-align: center;
+
+            margin-bottom: 38px;
+        }
+
+        .report-heading .eyebrow {
+            display: inline-block;
+
+            margin-bottom: 10px;
+
+            color: #16834b;
+
+            font-size: 0.72rem;
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .report-heading h1 {
+            margin-bottom: 12px;
+
+            color: #14213d;
+
+            font-size: clamp(2rem, 4vw, 2.8rem);
+
+            letter-spacing: -1px;
+        }
+
+        .report-heading p {
+            max-width: 650px;
+
+            margin: 0 auto;
+
+            color: #667085;
+
+            font-size: 0.9rem;
+
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           FORM CARD
+           ===================================================== */
+
+        .report-card {
+            background: #ffffff;
+
+            border: 1px solid #e7ebf0;
+
+            border-radius: 22px;
+
+            padding: 40px;
+
+            box-shadow:
+                0 18px 50px rgba(20, 33, 61, 0.09);
+        }
+
+        .form-section {
+            margin-bottom: 35px;
+        }
+
+        .form-section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            margin-bottom: 20px;
+
+            color: #14213d;
+
+            font-size: 1.05rem;
+            font-weight: 800;
+        }
+
+        .section-number {
+            width: 28px;
+            height: 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            flex-shrink: 0;
+
+            border-radius: 50%;
+
+            background: #f28c28;
+
+            color: #ffffff;
+
+            font-size: 0.72rem;
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           FORM GRID
+           ===================================================== */
+
+        .form-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 0;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #263238;
+
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .required {
+            color: #d9534f;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+
+            border: 1px solid #dfe4ea;
+
+            border-radius: 10px;
+
+            background: #ffffff;
+
+            color: #263238;
+
+            font: inherit;
+
+            font-size: 0.84rem;
+
+            outline: none;
+
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .form-input,
+        .form-select {
+            min-height: 48px;
+
+            padding: 11px 14px;
+        }
+
+        .form-textarea {
+            min-height: 130px;
+
+            padding: 13px 14px;
+
+            resize: vertical;
+
+            line-height: 1.6;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: #f28c28;
+
+            box-shadow:
+                0 0 0 3px rgba(242, 140, 40, 0.1);
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: #98a2b3;
+        }
+
+        .field-help {
+            display: block;
+
+            margin-top: 6px;
+
+            color: #98a2b3;
+
+            font-size: 0.7rem;
+
+            line-height: 1.5;
+        }
+
+        /* =====================================================
+           LOCATION
+           ===================================================== */
+
+        .location-box {
+            padding: 20px;
+
+            border: 1px solid #e5e9ee;
+
+            border-radius: 14px;
+
+            background: #f8fafc;
+        }
+
+        .location-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 16px;
+        }
+
+        .location-title {
+            color: #263238;
+
+            font-size: 0.82rem;
+            font-weight: 800;
+        }
+
+        .location-button {
+            border: none;
+
+            padding: 9px 14px;
+
+            border-radius: 8px;
+
+            background: #16834b;
+
+            color: #ffffff;
+
+            font-size: 0.72rem;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .location-button:hover {
+            background: #0f683b;
+
+            transform: translateY(-1px);
+        }
+
+        .coordinates {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 12px;
+        }
+
+        .coordinate-field {
+            padding: 11px 13px;
+
+            border: 1px solid #e1e6eb;
+
+            border-radius: 8px;
+
+            background: #ffffff;
+        }
+
+        .coordinate-label {
+            display: block;
+
+            margin-bottom: 4px;
+
+            color: #98a2b3;
+
+            font-size: 0.66rem;
+            font-weight: 700;
+        }
+
+        .coordinate-value {
+            color: #475467;
+
+            font-size: 0.76rem;
+        }
+
+        /* =====================================================
+           PHOTO UPLOAD
+           ===================================================== */
+
+        .upload-box {
+            position: relative;
+
+            padding: 28px 20px;
+
+            text-align: center;
+
+            border: 2px dashed #d6dce3;
+
+            border-radius: 14px;
+
+            background: #fafbfc;
+
+            transition:
+                border-color 0.3s ease,
+                background 0.3s ease;
+        }
+
+        .upload-box:hover {
+            border-color: #f28c28;
+
+            background: #fffaf5;
+        }
+
+        .upload-icon {
+            width: 48px;
+            height: 48px;
+
+            margin: 0 auto 12px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #fff1e3;
+
+            color: #f28c28;
+
+            font-size: 1.2rem;
+        }
+
+        .upload-box h3 {
+            margin-bottom: 5px;
+
+            color: #263238;
+
+            font-size: 0.88rem;
+        }
+
+        .upload-box p {
+            margin-bottom: 14px;
+
+            color: #98a2b3;
+
+            font-size: 0.72rem;
+        }
+
+        .file-input {
+            width: 100%;
+
+            font-size: 0.75rem;
+        }
+
+        .image-preview {
+            display: none;
+
+            max-width: 180px;
+            max-height: 130px;
+
+            margin: 18px auto 0;
+
+            border-radius: 10px;
+
+            object-fit: cover;
+
+            box-shadow:
+                0 5px 15px rgba(20, 33, 61, 0.12);
+        }
+
+        /* =====================================================
+           SUBMIT AREA
+           ===================================================== */
+
+        .submit-area {
+            margin-top: 35px;
+
+            padding-top: 28px;
+
+            border-top: 1px solid #e7ebf0;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 20px;
+        }
+
+        .submit-note {
+            max-width: 500px;
+
+            color: #98a2b3;
+
+            font-size: 0.7rem;
+
+            line-height: 1.6;
+        }
+
+        .submit-button {
+            min-width: 180px;
+
+            min-height: 50px;
+
+            padding: 12px 24px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #f28c28;
+
+            color: #ffffff;
+
+            font-size: 0.85rem;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px rgba(242, 140, 40, 0.2);
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background: #d96f0b;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(242, 140, 40, 0.28);
+        }
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .report-footer {
+            margin-top: 30px;
+
+            text-align: center;
+
+            color: #98a2b3;
+
+            font-size: 0.7rem;
+        }
+
+        .report-footer a {
+            color: #16834b;
+
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .report-page {
+                padding: 25px 15px 50px;
+            }
+
+            .report-card {
+                padding: 25px 20px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: auto;
+            }
+
+            .coordinates {
+                grid-template-columns: 1fr;
+            }
+
+            .submit-area {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .submit-button {
+                width: 100%;
+            }
+
+            .location-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .location-button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .report-topbar {
+                align-items: flex-start;
+            }
+
+            .report-brand {
+                font-size: 0.95rem;
+            }
+
+            .report-brand img {
+                width: 38px;
+                height: 38px;
+            }
+
+            .report-heading h1 {
+                font-size: 1.8rem;
+            }
+
+            .report-card {
+                padding: 22px 16px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <main class="report-page">
+
+        <div class="report-container">
+
+            <!-- =================================================
+                 TOP BAR
+                 ================================================= -->
+
+            <header class="report-topbar">
+
+                <a
+                    href="index.html"
+                    class="report-brand"
+                >
+
+                    <img
+                        src="assets/logo.png"
+                        alt="LokSahay logo"
+                    >
+
+                    <span>LokSahay</span>
+
+                </a>
+
+                <a
+                    href="index.html"
+                    class="back-home"
+                >
+                    ← Back to Home
+                </a>
+
+            </header>
+
+
+            <!-- =================================================
+                 PAGE HEADER
+                 ================================================= -->
+
+            <section class="report-heading">
+
+                <span class="eyebrow">
+                    Citizen Reporting
+                </span>
+
+                <h1>
+                    Report a Civic Issue
+                </h1>
+
+                <p>
+                    Help improve your community by reporting
+                    problems that need attention. Provide clear
+                    details and the location so the issue can be
+                    understood and addressed.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 REPORT FORM
+                 ================================================= -->
+
+            <form
+                id="reportForm"
+                class="report-card"
+            >
+
+                <!-- =================================================
+                     SECTION 1 — ISSUE DETAILS
+                     ================================================= -->
+
+                <section class="form-section">
+
+                    <h2 class="section-title">
+
+                        <span class="section-number">
+                            1
+                        </span>
+
+                        Issue Details
+
+                    </h2>
+
+
+                    <div class="form-grid">
+
+                        <!-- Title -->
+
+                        <div class="form-group full-width">
+
+                            <label for="issueTitle">
+                                Issue Title
+                                <span class="required">*</span>
+                            </label>
+
+                            <input
+                                type="text"
+                                id="issueTitle"
+                                name="issueTitle"
+                                class="form-input"
+                                placeholder="Example: Large pothole near college gate"
+                                maxlength="100"
+                                required
+                            >
+
+                            <span class="field-help">
+                                Give your issue a short and descriptive title.
+                            </span>
+
+                        </div>
+
+
+                        <!-- Category -->
+
+                        <div class="form-group">
+
+                            <label for="category">
+                                Issue Category
+                                <span class="required">*</span>
+                            </label>
+
+                            <select
+                                id="category"
+                                name="category"
+                                class="form-select"
+                                required
+                            >
+
+                                <option value="">
+                                    Select a category
+                                </option>
+
+                                <option value="roads">
+                                    Roads & Potholes
+                                </option>
+
+                                <option value="garbage">
+                                    Garbage & Waste
+                                </option>
+
+                                <option value="streetlights">
+                                    Streetlights
+                                </option>
+
+                                <option value="water">
+                                    Water & Sewage
+                                </option>
+
+                                <option value="infrastructure">
+                                    Public Infrastructure
+                                </option>
+
+                                <option value="other">
+                                    Other Issues
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Priority -->
+
+                        <div class="form-group">
+
+                            <label for="priority">
+                                Priority
+                            </label>
+
+                            <select
+                                id="priority"
+                                name="priority"
+                                class="form-select"
+                            >
+
+                                <option value="normal">
+                                    Normal
+                                </option>
+
+                                <option value="high">
+                                    High
+                                </option>
+
+                                <option value="urgent">
+                                    Urgent
+                                </option>
+
+                            </select>
+
+                            <span class="field-help">
+                                Use urgent only when there is an immediate public concern.
+                            </span>
+
+                        </div>
+
+
+                        <!-- Description -->
+
+                        <div class="form-group full-width">
+
+                            <label for="description">
+                                Description
+                                <span class="required">*</span>
+                            </label>
+
+                            <textarea
+                                id="description"
+                                name="description"
+                                class="form-textarea"
+                                placeholder="Describe what happened, where it is, and any useful details..."
+                                maxlength="1000"
+                                required
+                            ></textarea>
+
+                            <span class="field-help">
+                                Please provide accurate and useful information.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     SECTION 2 — LOCATION
+                     ================================================= -->
+
+                <section class="form-section">
+
+                    <h2 class="section-title">
+
+                        <span class="section-number">
+                            2
+                        </span>
+
+                        Issue Location
+
+                    </h2>
+
+
+                    <div class="location-box">
+
+                        <div class="location-header">
+
+                            <span class="location-title">
+                                Share the location of the issue
+                            </span>
+
+                            <button
+                                type="button"
+                                class="location-button"
+                                id="locationButton"
+                            >
+                                Use My Location
+                            </button>
+
+                        </div>
+
+
+                        <div class="coordinates">
+
+                            <div class="coordinate-field">
+
+                                <span class="coordinate-label">
+                                    Latitude
+                                </span>
+
+                                <span
+                                    class="coordinate-value"
+                                    id="latitude"
+                                >
+                                    Not provided
+                                </span>
+
+                            </div>
+
+
+                            <div class="coordinate-field">
+
+                                <span class="coordinate-label">
+                                    Longitude
+                                </span>
+
+                                <span
+                                    class="coordinate-value"
+                                    id="longitude"
+                                >
+                                    Not provided
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     SECTION 3 — PHOTO
+                     ================================================= -->
+
+                <section class="form-section">
+
+                    <h2 class="section-title">
+
+                        <span class="section-number">
+                            3
+                        </span>
+
+                        Add a Photo
+
+                    </h2>
+
+
+                    <div class="upload-box">
+
+                        <div class="upload-icon">
+                            📷
+                        </div>
+
+                        <h3>
+                            Add evidence of the issue
+                        </h3>
+
+                        <p>
+                            A clear photo can help explain the problem.
+                        </p>
+
+                        <input
+                            type="file"
+                            id="issueImage"
+                            name="issueImage"
+                            class="file-input"
+                            accept="image/*"
+                        >
+
+                        <img
+                            id="imagePreview"
+                            class="image-preview"
+                            alt="Selected issue preview"
+                        >
+
+                    </div>
+
+                </section>
+
+
+                <!-- =================================================
+                     SUBMIT
+                     ================================================= -->
+
+                <div class="submit-area">
+
+                    <p class="submit-note">
+                        Please make sure the information provided is
+                        accurate before submitting your report.
+                    </p>
+
+                    <button
+                        type="submit"
+                        class="submit-button"
+                    >
+                        Submit Report
+                    </button>
+
+                </div>
+
+            </form>
+
+
+            <footer class="report-footer">
+
+                <p>
+                    LokSahay — Empowering citizens to improve
+                    their communities.
+                </p>
+
+                <p>
+                    <a href="index.html">
+                        Return to Home
+                    </a>
+                </p>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         REPORT PAGE JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        const reportForm =
+            document.getElementById("reportForm");
+
+        const locationButton =
+            document.getElementById("locationButton");
+
+        const latitude =
+            document.getElementById("latitude");
+
+        const longitude =
+            document.getElementById("longitude");
+
+        const imageInput =
+            document.getElementById("issueImage");
+
+        const imagePreview =
+            document.getElementById("imagePreview");
+
+
+        /* =====================================================
+           LOCATION
+           ===================================================== */
+
+        if (locationButton) {
+
+            locationButton.addEventListener("click", () => {
+
+                if (!navigator.geolocation) {
+
+                    alert(
+                        "Location services are not supported by this browser."
+                    );
+
+                    return;
+
+                }
+
+                locationButton.textContent =
+                    "Getting Location...";
+
+                navigator.geolocation.getCurrentPosition(
+
+                    (position) => {
+
+                        const lat =
+                            position.coords.latitude;
+
+                        const lon =
+                            position.coords.longitude;
+
+                        latitude.textContent =
+                            lat.toFixed(6);
+
+                        longitude.textContent =
+                            lon.toFixed(6);
+
+                        locationButton.textContent =
+                            "Location Added";
+
+                    },
+
+                    () => {
+
+                        alert(
+                            "Unable to get your location. Please allow location access and try again."
+                        );
+
+                        locationButton.textContent =
+                            "Use My Location";
+
+                    }
+
+                );
+
+            });
+
+        }
+
+
+        /* =====================================================
+           IMAGE PREVIEW
+           ===================================================== */
+
+        if (imageInput && imagePreview) {
+
+            imageInput.addEventListener("change", () => {
+
+                const file =
+                    imageInput.files[0];
+
+                if (!file) {
+
+                    imagePreview.style.display = "none";
+
+                    return;
+
+                }
+
+                if (!file.type.startsWith("image/")) {
+
+                    alert(
+                        "Please select a valid image file."
+                    );
+
+                    imageInput.value = "";
+
+                    imagePreview.style.display = "none";
+
+                    return;
+
+                }
+
+                const imageURL =
+                    URL.createObjectURL(file);
+
+                imagePreview.src =
+                    imageURL;
+
+                imagePreview.style.display =
+                    "block";
+
+            });
+
+        }
+
+
+        /* =====================================================
+           FORM SUBMISSION
+           ===================================================== */
+
+        if (reportForm) {
+
+            reportForm.addEventListener("submit", (event) => {
+
+                event.preventDefault();
+
+                /*
+                 * Backend/API integration will be added later.
+                 * For now this only confirms that the frontend
+                 * form is working.
+                 */
+
+                alert(
+                    "Your report form is ready. Backend submission will be connected later."
+                );
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>

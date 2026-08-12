@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Login to LokSahay and manage your civic issue reports."
+    >
+
+    <title>Login | LokSahay</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           LOGIN PAGE
+           Page-specific styles
+           ===================================================== */
+
+        .auth-page {
+            min-height: 100vh;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 40px 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fafc 0%,
+                    #ffffff 55%,
+                    #eef8f2 100%
+                );
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-page::before {
+            content: "";
+
+            position: absolute;
+
+            width: 380px;
+            height: 380px;
+
+            top: -180px;
+            right: -120px;
+
+            border-radius: 50%;
+
+            background: rgba(242, 140, 40, 0.08);
+        }
+
+        .auth-page::after {
+            content: "";
+
+            position: absolute;
+
+            width: 350px;
+            height: 350px;
+
+            bottom: -180px;
+            left: -120px;
+
+            border-radius: 50%;
+
+            background: rgba(22, 131, 75, 0.07);
+        }
+
+        .auth-container {
+            position: relative;
+            z-index: 2;
+
+            width: min(100%, 1000px);
+
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            background: #ffffff;
+
+            border: 1px solid #e7ebf0;
+
+            border-radius: 24px;
+
+            overflow: hidden;
+
+            box-shadow:
+                0 20px 60px rgba(20, 33, 61, 0.12);
+        }
+
+        /* =====================================================
+           LEFT SIDE
+           ===================================================== */
+
+        .auth-info {
+            position: relative;
+
+            padding: 55px 45px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #14213d,
+                    #193453
+                );
+
+            overflow: hidden;
+        }
+
+        .auth-info::after {
+            content: "";
+
+            position: absolute;
+
+            width: 260px;
+            height: 260px;
+
+            right: -120px;
+            bottom: -120px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .auth-logo {
+            width: 62px;
+            height: 62px;
+
+            object-fit: contain;
+
+            margin-bottom: 25px;
+
+            border-radius: 10px;
+
+            background: #ffffff;
+            padding: 5px;
+        }
+
+        .auth-info h1 {
+            color: #ffffff;
+
+            font-size: 2.3rem;
+
+            letter-spacing: -1px;
+
+            margin-bottom: 16px;
+        }
+
+        .auth-info h1 span {
+            color: #ffad5c;
+        }
+
+        .auth-info > p {
+            max-width: 400px;
+
+            color: rgba(255, 255, 255, 0.68);
+
+            font-size: 0.92rem;
+
+            line-height: 1.75;
+
+            margin-bottom: 30px;
+        }
+
+        .auth-points {
+            list-style: none;
+
+            display: flex;
+            flex-direction: column;
+
+            gap: 14px;
+        }
+
+        .auth-points li {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            color: rgba(255, 255, 255, 0.8);
+
+            font-size: 0.82rem;
+        }
+
+        .auth-check {
+            width: 22px;
+            height: 22px;
+
+            flex-shrink: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: rgba(22, 131, 75, 0.25);
+
+            color: #79d29f;
+
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           RIGHT SIDE
+           ===================================================== */
+
+        .auth-form-section {
+            padding: 55px 45px;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .back-home {
+            align-self: flex-start;
+
+            margin-bottom: 28px;
+
+            color: #667085;
+
+            font-size: 0.78rem;
+            font-weight: 600;
+
+            transition: color 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #f28c28;
+        }
+
+        .auth-form-heading {
+            margin-bottom: 28px;
+        }
+
+        .auth-form-heading h2 {
+            margin-bottom: 8px;
+
+            color: #14213d;
+
+            font-size: 1.9rem;
+
+            letter-spacing: -0.7px;
+        }
+
+        .auth-form-heading p {
+            color: #667085;
+
+            font-size: 0.84rem;
+        }
+
+        .form-group {
+            margin-bottom: 19px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 7px;
+
+            color: #263238;
+
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+
+            min-height: 48px;
+
+            padding: 12px 14px;
+
+            border: 1px solid #dfe4ea;
+            border-radius: 10px;
+
+            background: #ffffff;
+
+            color: #263238;
+
+            font: inherit;
+            font-size: 0.86rem;
+
+            outline: none;
+
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #f28c28;
+
+            box-shadow:
+                0 0 0 3px rgba(242, 140, 40, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: #98a2b3;
+        }
+
+        .password-input {
+            padding-right: 78px;
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            top: 50%;
+            right: 12px;
+
+            transform: translateY(-50%);
+
+            border: none;
+
+            background: transparent;
+
+            color: #667085;
+
+            font-size: 0.72rem;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .password-toggle:hover {
+            color: #14213d;
+        }
+
+        .form-options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin: 3px 0 23px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+
+            gap: 7px;
+
+            color: #667085;
+
+            font-size: 0.74rem;
+        }
+
+        .remember-me input {
+            accent-color: #16834b;
+        }
+
+        .forgot-link {
+            color: #16834b;
+
+            font-size: 0.74rem;
+            font-weight: 700;
+        }
+
+        .forgot-link:hover {
+            color: #0f683b;
+        }
+
+        .login-button {
+            width: 100%;
+
+            min-height: 50px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #f28c28;
+
+            color: #ffffff;
+
+            font-size: 0.88rem;
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 8px 20px rgba(242, 140, 40, 0.2);
+
+            transition:
+                transform 0.3s ease,
+                background 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .login-button:hover {
+            background: #d96f0b;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 12px 25px rgba(242, 140, 40, 0.28);
+        }
+
+        .register-prompt {
+            margin-top: 23px;
+
+            text-align: center;
+
+            color: #667085;
+
+            font-size: 0.78rem;
+        }
+
+        .register-prompt a {
+            color: #16834b;
+
+            font-weight: 700;
+        }
+
+        .register-prompt a:hover {
+            color: #0f683b;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 760px) {
+
+            .auth-container {
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+            }
+
+            .auth-info {
+                padding: 35px 30px;
+            }
+
+            .auth-info h1 {
+                font-size: 1.9rem;
+            }
+
+            .auth-points {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+
+                gap: 10px;
+            }
+
+            .auth-form-section {
+                padding: 40px 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .auth-page {
+                padding: 20px 14px;
+            }
+
+            .auth-info {
+                padding: 30px 24px;
+            }
+
+            .auth-form-section {
+                padding: 32px 24px;
+            }
+
+            .auth-points {
+                grid-template-columns: 1fr;
+            }
+
+            .form-options {
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="auth-page">
+
+        <div class="auth-container">
+
+            <!-- =================================================
+                 LEFT INFORMATION PANEL
+                 ================================================= -->
+
+            <section class="auth-info">
+
+                <img
+                    src="assets/logo.png"
+                    alt="LokSahay logo"
+                    class="auth-logo"
+                >
+
+                <h1>
+                    Welcome to
+                    <span>LokSahay</span>
+                </h1>
+
+                <p>
+                    Report civic problems, track their progress,
+                    and help build cleaner, safer and better
+                    communities.
+                </p>
+
+                <ul class="auth-points">
+
+                    <li>
+                        <span class="auth-check">✓</span>
+                        Easy civic issue reporting
+                    </li>
+
+                    <li>
+                        <span class="auth-check">✓</span>
+                        Track complaint progress
+                    </li>
+
+                    <li>
+                        <span class="auth-check">✓</span>
+                        Location-based reporting
+                    </li>
+
+                    <li>
+                        <span class="auth-check">✓</span>
+                        Better citizen participation
+                    </li>
+
+                </ul>
+
+            </section>
+
+
+            <!-- =================================================
+                 LOGIN FORM
+                 ================================================= -->
+
+            <section class="auth-form-section">
+
+                <a
+                    href="index.html"
+                    class="back-home"
+                >
+                    ← Back to Home
+                </a>
+
+                <div class="auth-form-heading">
+
+                    <h2>Login</h2>
+
+                    <p>
+                        Sign in to continue to your LokSahay account.
+                    </p>
+
+                </div>
+
+
+                <form id="loginForm">
+
+                    <!-- Email -->
+
+                    <div class="form-group">
+
+                        <label for="email">
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            class="form-input"
+                            placeholder="Enter your email"
+                            autocomplete="email"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- Password -->
+
+                    <div class="form-group">
+
+                        <label for="password">
+                            Password
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                class="form-input password-input"
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                id="passwordToggle"
+                                aria-label="Show password"
+                            >
+                                Show
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Options -->
+
+                    <div class="form-options">
+
+                        <label class="remember-me">
+
+                            <input
+                                type="checkbox"
+                                id="remember"
+                                name="remember"
+                            >
+
+                            Remember me
+
+                        </label>
+
+                        <!-- Authentication functionality will be
+                             implemented with the backend later. -->
+
+                        <a
+                            href="#"
+                            class="forgot-link"
+                            onclick="return false;"
+                        >
+                            Forgot password?
+                        </a>
+
+                    </div>
+
+
+                    <!-- Login Button -->
+
+                    <button
+                        type="submit"
+                        class="login-button"
+                    >
+                        Login
+                    </button>
+
+                </form>
+
+
+                <!-- Register -->
+
+                <p class="register-prompt">
+
+                    Don't have an account?
+
+                    <a href="register.html">
+                        Create an account
+                    </a>
+
+                </p>
+
+            </section>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         LOGIN PAGE JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const passwordToggle =
+            document.getElementById("passwordToggle");
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+
+        /* Show / Hide Password */
+
+        if (passwordToggle && passwordInput) {
+
+            passwordToggle.addEventListener("click", () => {
+
+                const isPassword =
+                    passwordInput.type === "password";
+
+                passwordInput.type =
+                    isPassword ? "text" : "password";
+
+                passwordToggle.textContent =
+                    isPassword ? "Hide" : "Show";
+
+                passwordToggle.setAttribute(
+                    "aria-label",
+                    isPassword
+                        ? "Hide password"
+                        : "Show password"
+                );
+
+            });
+
+        }
+
+
+        /* Temporary frontend-only form handling */
+
+        if (loginForm) {
+
+            loginForm.addEventListener("submit", (event) => {
+
+                event.preventDefault();
+
+                alert(
+                    "Login functionality will be connected to the LokSahay backend."
+                );
+
+            });
+
+        }
+
+    </script>
+
+</body>
+</html>
