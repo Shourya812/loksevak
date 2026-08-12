@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>LokSahay | Admin Dashboard</title>
+
+    <!-- Admin Dashboard CSS -->
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+    <!-- =========================================
+         MOBILE HEADER
+    ========================================== -->
+
+    <header class="mobile-header">
+
+        <button
+            type="button"
+            class="menu-btn"
+            id="menuBtn"
+            aria-label="Open navigation"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <a href="#" class="mobile-logo">
+            <img
+                src="logo.png"
+                alt="LokSahay Logo"
+            >
+        </a>
+
+    </header>
+
+
+    <!-- =========================================
+         SIDEBAR
+    ========================================== -->
+
+    <aside class="sidebar" id="sidebar">
+
+        <!-- Logo -->
+
+        <div class="sidebar-brand">
+
+            <a href="#" class="brand-link">
+
+                <img
+                    src="logo.png"
+                    alt="LokSahay"
+                    class="brand-logo"
+                >
+
+            </a>
+
+            <span class="admin-label">
+                ADMIN PANEL
+            </span>
+
+        </div>
+
+
+        <!-- Navigation -->
+
+        <nav class="sidebar-nav" aria-label="Admin navigation">
+
+            <a
+                href="#dashboard"
+                class="nav-item active"
+                id="dashboardNav"
+            >
+
+                <span class="nav-icon" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                    </svg>
+
+                </span>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <a
+                href="#complaintsSection"
+                class="nav-item"
+                id="complaintsNav"
+            >
+
+                <span class="nav-icon" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M6 3h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"></path>
+                        <path d="M8 8h8"></path>
+                        <path d="M8 12h8"></path>
+                        <path d="M8 16h5"></path>
+                    </svg>
+
+                </span>
+
+                <span>Complaints</span>
+
+            </a>
+
+        </nav>
+
+
+        <!-- Sidebar Bottom -->
+
+        <div class="sidebar-bottom">
+
+            <div class="sidebar-divider"></div>
+
+            <button
+                type="button"
+                class="logout-btn"
+                id="logoutBtn"
+            >
+
+                <span class="nav-icon" aria-hidden="true">
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M10 17l5-5-5-5"></path>
+                        <path d="M15 12H3"></path>
+                        <path d="M21 19V5a2 2 0 0 0-2-2h-6"></path>
+                    </svg>
+
+                </span>
+
+                <span>Logout</span>
+
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =========================================
+         MOBILE SIDEBAR OVERLAY
+    ========================================== -->
+
+    <div
+        class="sidebar-overlay"
+        id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =========================================
+         MAIN CONTENT
+    ========================================== -->
+
+    <main class="main-content" id="dashboard">
+
+
+        <!-- =====================================
+             DASHBOARD HEADER
+        ====================================== -->
+
+        <header class="dashboard-header">
+
+            <div class="header-text">
+
+                <p class="eyebrow">
+                    LOKSAHAY ADMINISTRATION
+                </p>
+
+                <h1>
+                    Admin Dashboard
+                </h1>
+
+                <p class="header-description">
+                    Manage and monitor reported civic issues
+                    from one central dashboard.
+                </p>
+
+            </div>
+
+
+            <!-- Administrator Profile -->
+
+            <div class="header-actions">
+
+                <div class="admin-profile">
+
+                    <div class="profile-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 21c0-4 3.5-7 8-7s8 3 8 7"></path>
+                        </svg>
+
+                    </div>
+
+                    <div class="profile-text">
+
+                        <span class="profile-name">
+                            Administrator
+                        </span>
+
+                        <span class="profile-role">
+                            Civic Administration
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================
+             STATISTICS / OVERVIEW
+        ====================================== -->
+
+        <section
+            class="statistics-section"
+            aria-labelledby="statisticsTitle"
+        >
+
+            <div class="section-heading">
+
+                <div>
+
+                    <h2 id="statisticsTitle">
+                        Overview
+                    </h2>
+
+                    <p>
+                        Current complaint activity
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="statistics-grid">
+
+
+                <!-- TOTAL COMPLAINTS -->
+
+                <article class="stat-card stat-total">
+
+                    <div class="stat-card-top">
+
+                        <div class="stat-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path d="M4 5h16"></path>
+                                <path d="M4 12h16"></path>
+                                <path d="M4 19h16"></path>
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p class="stat-label">
+                            Total Complaints
+                        </p>
+
+                        <p
+                            class="stat-value"
+                            id="totalComplaints"
+                        >
+                            0
+                        </p>
+
+                        <p class="stat-helper">
+                            All reported issues
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- SUBMITTED -->
+
+                <article class="stat-card stat-submitted">
+
+                    <div class="stat-card-top">
+
+                        <div class="stat-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path d="M21 11.5a8.38 8.38 0 0 1-1.9 5.4"></path>
+                                <path d="M3 12a9 9 0 0 1 15-6.7"></path>
+                                <path d="M3 4v5h5"></path>
+                                <path d="M21 20v-5h-5"></path>
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p class="stat-label">
+                            Submitted
+                        </p>
+
+                        <p
+                            class="stat-value"
+                            id="submittedCount"
+                        >
+                            0
+                        </p>
+
+                        <p class="stat-helper">
+                            Awaiting review
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- UNDER REVIEW -->
+
+                <article class="stat-card stat-review">
+
+                    <div class="stat-card-top">
+
+                        <div class="stat-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <circle cx="11" cy="11" r="7"></circle>
+                                <path d="M20 20l-4-4"></path>
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p class="stat-label">
+                            Under Review
+                        </p>
+
+                        <p
+                            class="stat-value"
+                            id="underReviewCount"
+                        >
+                            0
+                        </p>
+
+                        <p class="stat-helper">
+                            Being assessed
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- IN PROGRESS -->
+
+                <article class="stat-card stat-progress">
+
+                    <div class="stat-card-top">
+
+                        <div class="stat-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path d="M12 2v4"></path>
+                                <path d="M12 18v4"></path>
+                                <path d="M4.93 4.93l2.83 2.83"></path>
+                                <path d="M16.24 16.24l2.83 2.83"></path>
+                                <path d="M2 12h4"></path>
+                                <path d="M18 12h4"></path>
+                                <path d="M4.93 19.07l2.83-2.83"></path>
+                                <path d="M16.24 7.76l2.83-2.83"></path>
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p class="stat-label">
+                            In Progress
+                        </p>
+
+                        <p
+                            class="stat-value"
+                            id="inProgressCount"
+                        >
+                            0
+                        </p>
+
+                        <p class="stat-helper">
+                            Currently being resolved
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <!-- RESOLVED -->
+
+                <article class="stat-card stat-resolved">
+
+                    <div class="stat-card-top">
+
+                        <div class="stat-icon">
+
+                            <svg
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="2"
+                            >
+                                <path d="M20 6L9 17l-5-5"></path>
+                            </svg>
+
+                        </div>
+
+                    </div>
+
+                    <div class="stat-content">
+
+                        <p class="stat-label">
+                            Resolved
+                        </p>
+
+                        <p
+                            class="stat-value"
+                            id="resolvedCount"
+                        >
+                            0
+                        </p>
+
+                        <p class="stat-helper">
+                            Successfully addressed
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================
+             COMPLAINTS
+        ====================================== -->
+
+        <section
+            class="complaints-section"
+            id="complaintsSection"
+            aria-labelledby="complaintsTitle"
+        >
+
+            <div class="complaints-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        ISSUE MANAGEMENT
+                    </p>
+
+                    <h2 id="complaintsTitle">
+                        Civic Complaints
+                    </h2>
+
+                    <p class="section-description">
+                        Review reported issues and manage
+                        their resolution progress.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Complaints Table -->
+
+            <div class="complaints-table-card">
+
+                <div class="table-wrapper">
+
+                    <table class="complaints-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th scope="col">
+                                    ID
+                                </th>
+
+                                <th scope="col">
+                                    Complaint
+                                </th>
+
+                                <th scope="col">
+                                    Category
+                                </th>
+
+                                <th scope="col">
+                                    Location
+                                </th>
+
+                                <th scope="col">
+                                    Date
+                                </th>
+
+                                <th scope="col">
+                                    Status
+                                </th>
+
+                                <th scope="col">
+                                    Action
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="complaintsTableBody">
+
+                            <tr>
+
+                                <td
+                                    colspan="7"
+                                    class="table-message"
+                                >
+
+                                    <div class="loading-state">
+
+                                        <div class="loading-icon">
+
+                                            <svg
+                                                viewBox="0 0 24 24"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                stroke-width="2"
+                                            >
+                                                <path d="M12 2v4"></path>
+                                                <path d="M12 18v4"></path>
+                                                <path d="M4.93 4.93l2.83 2.83"></path>
+                                                <path d="M16.24 16.24l2.83 2.83"></path>
+                                                <path d="M2 12h4"></path>
+                                                <path d="M18 12h4"></path>
+                                            </svg>
+
+                                        </div>
+
+                                        <span>
+                                            Loading complaints...
+                                        </span>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================
+         COMPLAINT DETAILS MODAL
+    ========================================== -->
+
+    <div
+        class="modal"
+        id="complaintDetailsModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="complaintDetailsTitle"
+        >
+
+
+            <!-- Modal Header -->
+
+            <div class="modal-header">
+
+                <div>
+
+                    <p class="eyebrow">
+                        COMPLAINT DETAILS
+                    </p>
+
+                    <h2 id="complaintDetailsTitle">
+                        Report Information
+                    </h2>
+
+                    <p>
+                        Review the reported civic issue
+                        and update its progress.
+                    </p>
+
+                </div>
+
+
+                <button
+                    type="button"
+                    class="close-modal-btn"
+                    id="closeComplaintModal"
+                    aria-label="Close complaint details"
+                >
+
+                    <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M18 6L6 18"></path>
+                        <path d="M6 6l12 12"></path>
+                    </svg>
+
+                </button>
+
+            </div>
+
+
+            <!-- Complaint Information -->
+
+            <div class="complaint-details">
+
+
+                <div class="detail-item detail-full-width">
+
+                    <span class="detail-label">
+                        Complaint Title
+                    </span>
+
+                    <p id="detailTitle">
+                        —
+                    </p>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Category
+                    </span>
+
+                    <p id="detailCategory">
+                        —
+                    </p>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Date / Time
+                    </span>
+
+                    <p id="detailDate">
+                        —
+                    </p>
+
+                </div>
+
+
+                <div class="detail-item detail-full-width">
+
+                    <span class="detail-label">
+                        Description
+                    </span>
+
+                    <p id="detailDescription">
+                        —
+                    </p>
+
+                </div>
+
+
+                <div class="detail-item detail-full-width">
+
+                    <span class="detail-label">
+                        Location
+                    </span>
+
+                    <p id="detailLocation">
+                        —
+                    </p>
+
+                </div>
+
+
+                <div class="detail-item">
+
+                    <span class="detail-label">
+                        Current Status
+                    </span>
+
+                    <p id="currentStatusDisplay">
+                        —
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- Status Update -->
+
+            <div class="status-update-section">
+
+                <div class="status-update-heading">
+
+                    <h3>
+                        Update Resolution Status
+                    </h3>
+
+                    <p>
+                        Keep the complaint progress
+                        up to date.
+                    </p>
+
+                </div>
+
+
+                <div class="status-controls">
+
+                    <label
+                        for="detailStatus"
+                        class="sr-only"
+                    >
+                        Complaint Status
+                    </label>
+
+                    <select id="detailStatus">
+
+                        <option value="Submitted">
+                            Submitted
+                        </option>
+
+                        <option value="Under Review">
+                            Under Review
+                        </option>
+
+                        <option value="In Progress">
+                            In Progress
+                        </option>
+
+                        <option value="Resolved">
+                            Resolved
+                        </option>
+
+                    </select>
+
+
+                    <button
+                        type="button"
+                        id="updateStatusBtn"
+                        class="update-status-btn"
+                    >
+
+                        <span>
+                            Update Status
+                        </span>
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="2"
+                        >
+                            <path d="M5 12h14"></path>
+                            <path d="M13 6l6 6-6 6"></path>
+                        </svg>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         JAVASCRIPT
+    ========================================== -->
+
+    <script src="admin.js" defer></script>
+
+</body>
+
+</html>
