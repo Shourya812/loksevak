@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<meta
+    name="description"
+    content="LokSahay - Report civic issues, track progress, and help build better communities."
+>
+
+<title>LokSahay | Your City. Your Voice. Your Solution.</title>
+
+<link rel="stylesheet" href="style.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- ==================== NAVBAR ==================== -->
+<header class="site-header">
+    <nav class="navbar container" aria-label="Main navigation">
+
+        <!-- Logo -->
+        <a href="index.html" class="brand">
+            <img
+                src="assets/logo.png"
+                alt="LokSahay Logo"
+                class="brand-logo"
+            >
+
+            <div class="brand-text">
+                <span class="brand-name">LokSahay</span>
+                <span class="brand-tagline">CivicConnect</span>
+            </div>
+        </a>
+
+        <!-- Mobile Menu Button -->
+        <button
+            class="menu-toggle"
+            id="menuToggle"
+            type="button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="navLinks"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <!-- Navigation Links -->
+        <div class="nav-links" id="navLinks">
+
+            <a href="index.html" class="nav-link active">
+                Home
+            </a>
+
+            <a href="report.html" class="nav-link">
+                Report Issue
+            </a>
+
+            <a href="track.html" class="nav-link">
+                Track Issue
+            </a>
+
+            <div class="nav-actions">
+
+                <a href="login.html" class="btn btn-outline btn-small">
+                    Login
+                </a>
+
+                <a href="register.html" class="btn btn-primary btn-small">
+                    Register
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+</header>
+
+
+<!-- ==================== MAIN CONTENT ==================== -->
+<main>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero">
+
+        <div class="hero-pattern"></div>
+
+        <div class="container hero-content">
+
+            <!-- Hero Text -->
+            <div class="hero-text reveal">
+
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    A smarter way to improve our communities
+                </div>
+
+                <h1>
+                    Your City.
+                    <span class="text-saffron">Your Voice.</span>
+                    <br>
+                    Your Solution.
+                </h1>
+
+                <p class="hero-description">
+                    Report civic issues, track their progress, and help
+                    build cleaner, safer and better communities — one
+                    report at a time.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="report.html"
+                        class="btn btn-primary btn-large"
+                    >
+                        Report an Issue
+                        <span class="btn-arrow">→</span>
+                    </a>
+
+                    <a
+                        href="track.html"
+                        class="btn btn-secondary btn-large"
+                    >
+                        Track an Issue
+                    </a>
+
+                </div>
+
+                <div class="hero-trust">
+                    <span class="trust-check">✓</span>
+                    Making civic participation simpler, one report at a time.
+                </div>
+
+            </div>
+
+
+            <!-- Hero Visual -->
+            <div class="hero-visual reveal">
+
+                <div class="visual-glow"></div>
+
+                <div class="city-card">
+
+                    <div class="city-card-top">
+                        <span class="live-dot"></span>
+                        <span>Community Dashboard</span>
+                    </div>
+
+                    <div class="city-illustration">
+
+                        <div class="sun"></div>
+
+                        <!-- Buildings -->
+                        <div class="building building-one">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <div class="building building-two">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <div class="building building-three">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                        <!-- Trees -->
+                        <div class="tree tree-one">
+                            <div class="tree-top"></div>
+                            <div class="tree-trunk"></div>
+                        </div>
+
+                        <div class="tree tree-two">
+                            <div class="tree-top"></div>
+                            <div class="tree-trunk"></div>
+                        </div>
+
+                        <!-- Road -->
+                        <div class="road">
+                            <div class="road-line"></div>
+                        </div>
+
+                        <!-- Issue Marker -->
+                        <div class="issue-pin">
+                            <div class="pin-head">!</div>
+                        </div>
+
+                    </div>
+
+
+                    <!-- Issue Status -->
+                    <div class="issue-status">
+
+                        <div>
+                            <span class="status-label">
+                                Issue Reported
+                            </span>
+
+                            <strong>
+                                Pothole on Main Road
+                            </strong>
+                        </div>
+
+                        <span class="status-pill">
+                            Tracked
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Floating Card 1 -->
+                <div class="floating-card floating-card-one">
+
+                    <span class="floating-icon green-icon">
+                        ✓
+                    </span>
+
+                    <div>
+                        <strong>Issue Resolved</strong>
+                        <small>Streetlight repaired</small>
+                    </div>
+
+                </div>
+
+
+                <!-- Floating Card 2 -->
+                <div class="floating-card floating-card-two">
+
+                    <span class="floating-icon saffron-icon">
+                        +
+                    </span>
+
+                    <div>
+                        <strong>New Report</strong>
+                        <small>Location verified</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== HOW IT WORKS ==================== -->
+    <section
+        class="section how-section"
+        id="how-it-works"
+    >
+
+        <div class="container">
+
+            <div class="section-heading reveal">
+
+                <span class="section-label">
+                    HOW IT WORKS
+                </span>
+
+                <h2>
+                    From problem to progress.
+                </h2>
+
+                <p>
+                    LokSahay makes it simple for citizens to bring civic
+                    issues to attention and follow their journey.
+                </p>
+
+            </div>
+
+
+            <div class="steps-grid">
+
+                <!-- Step 1 -->
+                <article class="step-card reveal">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div class="step-icon saffron-bg">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="M12 20h9"></path>
+                            <path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L8 18l-4 1 1-4Z"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>
+                        Report
+                    </h3>
+
+                    <p>
+                        Tell us about a civic issue and provide its
+                        location so it can be understood clearly.
+                    </p>
+
+                </article>
+
+
+                <!-- Step 2 -->
+                <article class="step-card reveal">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div class="step-icon green-bg">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <polyline points="12 7 12 12 15 14"></polyline>
+                        </svg>
+
+                    </div>
+
+                    <h3>
+                        Track
+                    </h3>
+
+                    <p>
+                        Follow the progress of your complaint from
+                        submission through the resolution process.
+                    </p>
+
+                </article>
+
+
+                <!-- Step 3 -->
+                <article class="step-card reveal">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div class="step-icon navy-bg">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="M20 6 9 17l-5-5"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>
+                        Resolve
+                    </h3>
+
+                    <p>
+                        Help identify problems and contribute to
+                        meaningful improvements in your community.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== ISSUE CATEGORIES ==================== -->
+    <section class="section categories-section">
+
+        <div class="container">
+
+            <div class="section-heading reveal">
+
+                <span class="section-label">
+                    CIVIC ISSUES
+                </span>
+
+                <h2>
+                    Report what matters.
+                </h2>
+
+                <p>
+                    From everyday infrastructure problems to public
+                    cleanliness, every issue deserves attention.
+                </p>
+
+            </div>
+
+
+            <div class="categories-grid">
+
+                <!-- Roads -->
+                <article class="category-card reveal">
+
+                    <div class="category-icon">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="M3 17h18"></path>
+                            <path d="M5 17 7 9h10l2 8"></path>
+                            <path d="M8 9V6h8v3"></path>
+                            <circle cx="7" cy="19" r="2"></circle>
+                            <circle cx="17" cy="19" r="2"></circle>
+                        </svg>
+
+                    </div>
+
+                    <h3>
+                        Roads & Potholes
+                    </h3>
+
+                    <p>
+                        Report damaged roads, potholes and unsafe
+                        pathways.
+                    </p>
+
+                </article>
+
+
+                <!-- Garbage -->
+                <article class="category-card reveal">
+
+                    <div class="category-icon green-category">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="M4 7h16"></path>
+                            <path d="M6 7v13h12V7"></path>
+                            <path d="M9 7V4h6v3"></path>
+                            <path d="M10 11v5"></path>
+                            <path d="M14 11v5"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>
+                        Garbage & Waste
+                    </h3>
+
+                    <p>
+                        Flag overflowing bins, litter and waste
+                        management issues.
+                    </p>
+
+                </article>
+
+
+                <!-- Streetlights -->
+                <article class="category-card reveal">
+
+                    <div class="category-icon saffron-category">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="M9 21h6"></path>
+                            <path d="M10 17h4"></path>
+                            <path d="M8 13a6 6 0 1 1 8 0c-.8.7-1 1.5-1 2H9c0-.5-.2-1.3-1-2Z"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>
+                        Streetlights
+                    </h3>
+
+                    <p>
+                        Report broken or non-functional streetlights
+                        in your area.
+                    </p>
+
+                </article>
+
+
+                <!-- Water -->
+                <article class="category-card reveal">
+
+                    <div class="category-icon blue-category">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="M12 3s6 6.2 6 11a6 6 0 0 1-12 0c0-4.8 6-11 6-11Z"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>
+                        Water & Sewage
+                    </h3>
+
+                    <p>
+                        Bring water supply, drainage and sewage
+                        concerns to attention.
+                    </p>
+
+                </article>
+
+
+                <!-- Infrastructure -->
+                <article class="category-card reveal">
+
+                    <div class="category-icon purple-category">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <path d="M4 21V8l8-5 8 5v13"></path>
+                            <path d="M8 21v-7h8v7"></path>
+                            <path d="M9 9h1"></path>
+                            <path d="M14 9h1"></path>
+                        </svg>
+
+                    </div>
+
+                    <h3>
+                        Public Infrastructure
+                    </h3>
+
+                    <p>
+                        Report issues affecting public spaces and
+                        facilities.
+                    </p>
+
+                </article>
+
+
+                <!-- Other -->
+                <article class="category-card reveal">
+
+                    <div class="category-icon orange-category">
+
+                        <svg
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                        >
+                            <circle cx="12" cy="12" r="9"></circle>
+                            <path d="M12 8v4"></path>
+                            <circle cx="12" cy="16" r=".5"></circle>
+                        </svg>
+
+                    </div>
+
+                    <h3>
+                        Other Issues
+                    </h3>
+
+                    <p>
+                        Have another civic concern? Let the community
+                        know.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== IMPACT / STATISTICS ==================== -->
+    <section class="impact-section">
+
+        <div class="container">
+
+            <div class="impact-header reveal">
+
+                <div>
+
+                    <span class="section-label light-label">
+                        OUR IMPACT
+                    </span>
+
+                    <h2>
+                        Small reports. Meaningful change.
+                    </h2>
+
+                </div>
+
+                <p>
+                    These prototype statistics are structured to be
+                    replaced with live data when the backend is connected.
+                </p>
+
+            </div>
+
+
+            <div class="stats-grid">
+
+                <div class="stat-card reveal">
+                    <strong>
+                        1,250<span>+</span>
+                    </strong>
+                    <p>
+                        Issues Reported
+                    </p>
+                </div>
+
+                <div class="stat-card reveal">
+                    <strong>
+                        780<span>+</span>
+                    </strong>
+                    <p>
+                        Issues Resolved
+                    </p>
+                </div>
+
+                <div class="stat-card reveal">
+                    <strong>
+                        620<span>+</span>
+                    </strong>
+                    <p>
+                        Active Citizens
+                    </p>
+                </div>
+
+                <div class="stat-card reveal">
+                    <strong>
+                        92<span>%</span>
+                    </strong>
+                    <p>
+                        Resolution Progress
+                    </p>
+                </div>
+
+            </div>
+
+
+            <p class="prototype-note">
+                Prototype statistics — ready for live backend integration.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== WHY LOKSAHAY ==================== -->
+    <section class="section why-section">
+
+        <div class="container">
+
+            <div class="section-heading reveal">
+
+                <span class="section-label">
+                    WHY LOKSAHAY?
+                </span>
+
+                <h2>
+                    Civic participation, made simpler.
+                </h2>
+
+                <p>
+                    Designed to make reporting transparent, accessible
+                    and useful for everyone.
+                </p>
+
+            </div>
+
+
+            <div class="benefits-grid">
+
+                <article class="benefit-card reveal">
+                    <div class="benefit-number">01</div>
+
+                    <h3>
+                        Easy Reporting
+                    </h3>
+
+                    <p>
+                        Report a problem with a simple and straightforward
+                        process.
+                    </p>
+                </article>
+
+
+                <article class="benefit-card reveal">
+                    <div class="benefit-number">02</div>
+
+                    <h3>
+                        Location-Based Complaints
+                    </h3>
+
+                    <p>
+                        Connect civic reports with the place where the
+                        issue occurs.
+                    </p>
+                </article>
+
+
+                <article class="benefit-card reveal">
+                    <div class="benefit-number">03</div>
+
+                    <h3>
+                        Transparent Tracking
+                    </h3>
+
+                    <p>
+                        Follow the progress of a complaint instead of
+                        wondering what happens next.
+                    </p>
+                </article>
+
+
+                <article class="benefit-card reveal">
+                    <div class="benefit-number">04</div>
+
+                    <h3>
+                        Faster Resolution
+                    </h3>
+
+                    <p>
+                        Organized reports can make it easier to identify
+                        and prioritize problems.
+                    </p>
+                </article>
+
+
+                <article class="benefit-card reveal">
+                    <div class="benefit-number">05</div>
+
+                    <h3>
+                        Citizen Participation
+                    </h3>
+
+                    <p>
+                        Give citizens a simple way to contribute to
+                        better communities.
+                    </p>
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ==================== FINAL CTA ==================== -->
+    <section class="final-cta">
+
+        <div class="container">
+
+            <div class="cta-box reveal">
+
+                <div class="cta-decoration cta-decoration-one"></div>
+                <div class="cta-decoration cta-decoration-two"></div>
+
+                <div class="cta-content">
+
+                    <span class="section-label light-label">
+                        MAKE A DIFFERENCE
+                    </span>
+
+                    <h2>
+                        See a problem? Help make it better.
+                    </h2>
+
+                    <p>
+                        Your report can be the first step toward a cleaner,
+                        safer and more connected community.
+                    </p>
+
+                    <a
+                        href="report.html"
+                        class="btn btn-white btn-large"
+                    >
+                        Report an Issue
+                        <span class="btn-arrow">→</span>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer">
+
+    <div class="container footer-main">
+
+        <!-- Footer Brand -->
+        <div class="footer-brand">
+
+            <a href="index.html" class="brand footer-brand-link">
+
+                <img
+                    src="assets/logo.png"
+                    alt="LokSahay Logo"
+                    class="brand-logo"
+                >
+
+                <div class="brand-text">
+
+                    <span class="brand-name">
+                        LokSahay
+                    </span>
+
+                    <span class="brand-tagline">
+                        CivicConnect
+                    </span>
+
+                </div>
+
+            </a>
+
+            <p>
+                Empowering citizens to report, track and improve
+                civic issues.
+            </p>
+
+        </div>
+
+
+        <!-- Footer Links -->
+        <div class="footer-links">
+
+            <h3>
+                Quick Links
+            </h3>
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="report.html">
+                Report Issue
+            </a>
+
+            <a href="track.html">
+                Track Issue
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+            <a href="register.html">
+                Register
+            </a>
+
+        </div>
+
+
+        <!-- Footer Project Info -->
+        <div class="footer-project">
+
+            <h3>
+                LokSahay
+            </h3>
+
+            <p>
+                A college hackathon prototype focused on making civic
+                participation simpler and more transparent.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+
+        <div class="container">
+
+            <p>
+                Built for our college hackathon.
+            </p>
+
+            <p>
+                © 2026 LokSahay. Prototype Project.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- JavaScript -->
+<script src="script.js"></script>
+```
+
+</body>
+</html>

@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Track your civic issue report with LokSahay."
+    >
+
+    <title>Track Issue | LokSahay</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* =====================================================
+           TRACK PAGE
+           ===================================================== */
+
+        .track-page {
+            min-height: 100vh;
+
+            padding: 40px 20px 70px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8fafc 0%,
+                    #ffffff 55%,
+                    #eef8f2 100%
+                );
+        }
+
+        .track-container {
+            width: min(100%, 1050px);
+
+            margin: 0 auto;
+        }
+
+        /* =====================================================
+           TOP BAR
+           ===================================================== */
+
+        .track-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 45px;
+        }
+
+        .track-brand {
+            display: flex;
+            align-items: center;
+
+            gap: 10px;
+
+            color: #14213d;
+
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .track-brand img {
+            width: 45px;
+            height: 45px;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+        .back-home {
+            color: #667085;
+
+            font-size: 0.8rem;
+            font-weight: 700;
+
+            transition: color 0.3s ease;
+        }
+
+        .back-home:hover {
+            color: #f28c28;
+        }
+
+        /* =====================================================
+           PAGE HEADING
+           ===================================================== */
+
+        .track-heading {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+        .track-heading .eyebrow {
+            display: inline-block;
+
+            margin-bottom: 10px;
+
+            color: #16834b;
+
+            font-size: 0.72rem;
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .track-heading h1 {
+            margin-bottom: 12px;
+
+            color: #14213d;
+
+            font-size: clamp(2rem, 4vw, 2.8rem);
+
+            letter-spacing: -1px;
+        }
+
+        .track-heading p {
+            max-width: 620px;
+
+            margin: 0 auto;
+
+            color: #667085;
+
+            font-size: 0.9rem;
+
+            line-height: 1.7;
+        }
+
+        /* =====================================================
+           SEARCH CARD
+           ===================================================== */
+
+        .track-search-card {
+            max-width: 760px;
+
+            margin: 0 auto 35px;
+
+            padding: 28px;
+
+            background: #ffffff;
+
+            border: 1px solid #e7ebf0;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 40px rgba(20, 33, 61, 0.08);
+        }
+
+        .track-search-card label {
+            display: block;
+
+            margin-bottom: 9px;
+
+            color: #263238;
+
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .search-row {
+            display: flex;
+
+            gap: 10px;
+        }
+
+        .track-input {
+            flex: 1;
+
+            min-height: 48px;
+
+            padding: 11px 14px;
+
+            border: 1px solid #dfe4ea;
+
+            border-radius: 10px;
+
+            background: #ffffff;
+
+            color: #263238;
+
+            font: inherit;
+
+            font-size: 0.84rem;
+
+            outline: none;
+
+            transition:
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .track-input:focus {
+            border-color: #f28c28;
+
+            box-shadow:
+                0 0 0 3px rgba(242, 140, 40, 0.1);
+        }
+
+        .track-input::placeholder {
+            color: #98a2b3;
+        }
+
+        .search-button {
+            min-width: 125px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #f28c28;
+
+            color: #ffffff;
+
+            font-size: 0.8rem;
+            font-weight: 800;
+
+            cursor: pointer;
+
+            transition:
+                background 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        .search-button:hover {
+            background: #d96f0b;
+
+            transform: translateY(-1px);
+        }
+
+        .search-help {
+            display: block;
+
+            margin-top: 8px;
+
+            color: #98a2b3;
+
+            font-size: 0.7rem;
+        }
+
+        /* =====================================================
+           RESULT
+           ===================================================== */
+
+        .tracking-result {
+            display: none;
+
+            background: #ffffff;
+
+            border: 1px solid #e7ebf0;
+
+            border-radius: 22px;
+
+            padding: 35px;
+
+            box-shadow:
+                0 18px 50px rgba(20, 33, 61, 0.09);
+
+            animation: fadeUp 0.4s ease;
+        }
+
+        .tracking-result.visible {
+            display: block;
+        }
+
+        @keyframes fadeUp {
+
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+        /* =====================================================
+           ISSUE HEADER
+           ===================================================== */
+
+        .issue-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+
+            gap: 20px;
+
+            padding-bottom: 25px;
+
+            border-bottom: 1px solid #e7ebf0;
+        }
+
+        .issue-id {
+            margin-bottom: 7px;
+
+            color: #16834b;
+
+            font-size: 0.7rem;
+            font-weight: 800;
+
+            letter-spacing: 0.8px;
+        }
+
+        .issue-title {
+            margin-bottom: 8px;
+
+            color: #14213d;
+
+            font-size: 1.35rem;
+        }
+
+        .issue-meta {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 8px;
+
+            color: #667085;
+
+            font-size: 0.72rem;
+        }
+
+        .issue-status {
+            flex-shrink: 0;
+
+            padding: 8px 13px;
+
+            border-radius: 20px;
+
+            background: #fff3df;
+
+            color: #c56c0a;
+
+            font-size: 0.7rem;
+            font-weight: 800;
+        }
+
+        /* =====================================================
+           PROGRESS
+           ===================================================== */
+
+        .progress-section {
+            padding: 32px 0;
+        }
+
+        .progress-title {
+            margin-bottom: 25px;
+
+            color: #14213d;
+
+            font-size: 0.95rem;
+            font-weight: 800;
+        }
+
+        .progress-line {
+            position: relative;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            gap: 10px;
+        }
+
+        .progress-line::before {
+            content: "";
+
+            position: absolute;
+
+            top: 17px;
+            left: 8%;
+
+            width: 84%;
+            height: 3px;
+
+            background: #e4e8ed;
+
+            z-index: 0;
+        }
+
+        .progress-step {
+            position: relative;
+
+            z-index: 1;
+
+            text-align: center;
+        }
+
+        .progress-icon {
+            width: 36px;
+            height: 36px;
+
+            margin: 0 auto 10px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #e8edf2;
+
+            color: #667085;
+
+            font-size: 0.72rem;
+            font-weight: 800;
+
+            border: 4px solid #ffffff;
+        }
+
+        .progress-step.completed .progress-icon {
+            background: #16834b;
+
+            color: #ffffff;
+        }
+
+        .progress-step.active .progress-icon {
+            background: #f28c28;
+
+            color: #ffffff;
+
+            box-shadow:
+                0 0 0 4px rgba(242, 140, 40, 0.12);
+        }
+
+        .progress-label {
+            color: #667085;
+
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .progress-step.completed .progress-label,
+        .progress-step.active .progress-label {
+            color: #263238;
+        }
+
+        /* =====================================================
+           DETAILS
+           ===================================================== */
+
+        .details-grid {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 15px;
+
+            padding-top: 25px;
+
+            border-top: 1px solid #e7ebf0;
+        }
+
+        .detail-card {
+            padding: 18px;
+
+            border-radius: 12px;
+
+            background: #f8fafc;
+
+            border: 1px solid #e9edf1;
+        }
+
+        .detail-label {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: #98a2b3;
+
+            font-size: 0.67rem;
+            font-weight: 700;
+        }
+
+        .detail-value {
+            color: #263238;
+
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           INFO MESSAGE
+           ===================================================== */
+
+        .info-message {
+            margin-top: 25px;
+
+            padding: 15px 18px;
+
+            border-radius: 10px;
+
+            background: #eef8f2;
+
+            border-left: 4px solid #16834b;
+
+            color: #426052;
+
+            font-size: 0.75rem;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           EMPTY STATE
+           ===================================================== */
+
+        .empty-state {
+            text-align: center;
+
+            padding: 45px 20px;
+
+            color: #667085;
+        }
+
+        .empty-icon {
+            width: 60px;
+            height: 60px;
+
+            margin: 0 auto 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #fff1e3;
+
+            color: #f28c28;
+
+            font-size: 1.4rem;
+        }
+
+        .empty-state h2 {
+            margin-bottom: 8px;
+
+            color: #14213d;
+
+            font-size: 1.05rem;
+        }
+
+        .empty-state p {
+            max-width: 450px;
+
+            margin: 0 auto;
+
+            font-size: 0.78rem;
+
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           FOOTER
+           ===================================================== */
+
+        .track-footer {
+            margin-top: 35px;
+
+            text-align: center;
+
+            color: #98a2b3;
+
+            font-size: 0.7rem;
+        }
+
+        .track-footer a {
+            color: #16834b;
+
+            font-weight: 700;
+        }
+
+        /* =====================================================
+           RESPONSIVE
+           ===================================================== */
+
+        @media (max-width: 700px) {
+
+            .track-page {
+                padding: 25px 15px 50px;
+            }
+
+            .track-topbar {
+                margin-bottom: 35px;
+            }
+
+            .track-search-card {
+                padding: 22px 18px;
+            }
+
+            .search-row {
+                flex-direction: column;
+            }
+
+            .search-button {
+                min-height: 46px;
+            }
+
+            .tracking-result {
+                padding: 25px 20px;
+            }
+
+            .issue-header {
+                flex-direction: column;
+            }
+
+            .issue-status {
+                align-self: flex-start;
+            }
+
+            .progress-line {
+                grid-template-columns: 1fr;
+
+                gap: 18px;
+            }
+
+            .progress-line::before {
+                top: 17px;
+                left: 17px;
+
+                width: 3px;
+                height: calc(100% - 34px);
+            }
+
+            .progress-step {
+                display: flex;
+                align-items: center;
+
+                gap: 12px;
+
+                text-align: left;
+            }
+
+            .progress-icon {
+                margin: 0;
+            }
+
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 450px) {
+
+            .track-brand {
+                font-size: 0.95rem;
+            }
+
+            .track-brand img {
+                width: 38px;
+                height: 38px;
+            }
+
+            .track-heading h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <main class="track-page">
+
+        <div class="track-container">
+
+            <!-- =================================================
+                 TOP BAR
+                 ================================================= -->
+
+            <header class="track-topbar">
+
+                <a
+                    href="index.html"
+                    class="track-brand"
+                >
+
+                    <img
+                        src="assets/logo.png"
+                        alt="LokSahay logo"
+                    >
+
+                    <span>LokSahay</span>
+
+                </a>
+
+                <a
+                    href="index.html"
+                    class="back-home"
+                >
+                    ← Back to Home
+                </a>
+
+            </header>
+
+
+            <!-- =================================================
+                 PAGE HEADING
+                 ================================================= -->
+
+            <section class="track-heading">
+
+                <span class="eyebrow">
+                    Issue Tracking
+                </span>
+
+                <h1>
+                    Track Your Issue
+                </h1>
+
+                <p>
+                    Enter your complaint ID to check the current
+                    progress of your civic issue report.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 SEARCH
+                 ================================================= -->
+
+            <section class="track-search-card">
+
+                <form id="trackForm">
+
+                    <label for="issueId">
+                        Complaint / Issue ID
+                    </label>
+
+                    <div class="search-row">
+
+                        <input
+                            type="text"
+                            id="issueId"
+                            class="track-input"
+                            placeholder="Example: LS-1024"
+                            autocomplete="off"
+                            required
+                        >
+
+                        <button
+                            type="submit"
+                            class="search-button"
+                        >
+                            Track Issue
+                        </button>
+
+                    </div>
+
+                    <span class="search-help">
+                        Your complaint ID will be provided after
+                        a successful report submission.
+                    </span>
+
+                </form>
+
+            </section>
+
+
+            <!-- =================================================
+                 DEMO TRACKING RESULT
+                 ================================================= -->
+
+            <section
+                id="trackingResult"
+                class="tracking-result"
+                aria-live="polite"
+            >
+
+                <div class="issue-header">
+
+                    <div>
+
+                        <div class="issue-id">
+                            ISSUE ID: LS-1024
+                        </div>
+
+                        <h2 class="issue-title">
+                            Road Damage Near Main Market
+                        </h2>
+
+                        <div class="issue-meta">
+
+                            <span>
+                                Roads & Potholes
+                            </span>
+
+                            <span>•</span>
+
+                            <span>
+                                Reported recently
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <span class="issue-status">
+                        In Progress
+                    </span>
+
+                </div>
+
+
+                <!-- =================================================
+                     PROGRESS
+                     ================================================= -->
+
+                <div class="progress-section">
+
+                    <h3 class="progress-title">
+                        Resolution Progress
+                    </h3>
+
+
+                    <div class="progress-line">
+
+                        <!-- Step 1 -->
+
+                        <div class="progress-step completed">
+
+                            <div class="progress-icon">
+                                ✓
+                            </div>
+
+                            <span class="progress-label">
+                                Reported
+                            </span>
+
+                        </div>
+
+
+                        <!-- Step 2 -->
+
+                        <div class="progress-step completed">
+
+                            <div class="progress-icon">
+                                ✓
+                            </div>
+
+                            <span class="progress-label">
+                                Verified
+                            </span>
+
+                        </div>
+
+
+                        <!-- Step 3 -->
+
+                        <div class="progress-step active">
+
+                            <div class="progress-icon">
+                                3
+                            </div>
+
+                            <span class="progress-label">
+                                In Progress
+                            </span>
+
+                        </div>
+
+
+                        <!-- Step 4 -->
+
+                        <div class="progress-step">
+
+                            <div class="progress-icon">
+                                4
+                            </div>
+
+                            <span class="progress-label">
+                                Resolved
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =================================================
+                     DETAILS
+                     ================================================= -->
+
+                <div class="details-grid">
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            CATEGORY
+                        </span>
+
+                        <span class="detail-value">
+                            Roads & Potholes
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            LOCATION
+                        </span>
+
+                        <span class="detail-value">
+                            Main Market Area
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            CURRENT STATUS
+                        </span>
+
+                        <span class="detail-value">
+                            Work in Progress
+                        </span>
+
+                    </div>
+
+
+                    <div class="detail-card">
+
+                        <span class="detail-label">
+                            LAST UPDATED
+                        </span>
+
+                        <span class="detail-value">
+                            Prototype Data
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="info-message">
+
+                    This is currently prototype tracking data.
+                    Once the backend is connected, this section
+                    will display live complaint status and updates.
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 EMPTY STATE
+                 ================================================= -->
+
+            <section
+                id="emptyState"
+                class="empty-state"
+            >
+
+                <div class="empty-icon">
+                    🔎
+                </div>
+
+                <h2>
+                    Check the status of your report
+                </h2>
+
+                <p>
+                    Enter your complaint ID above to view the
+                    current progress of your civic issue.
+                </p>
+
+            </section>
+
+
+            <!-- =================================================
+                 FOOTER
+                 ================================================= -->
+
+            <footer class="track-footer">
+
+                <p>
+                    LokSahay — Empowering citizens to improve
+                    their communities.
+                </p>
+
+                <p>
+                    <a href="report.html">
+                        Report a new issue
+                    </a>
+                    &nbsp; • &nbsp;
+                    <a href="index.html">
+                        Home
+                    </a>
+                </p>
+
+            </footer>
+
+        </div>
+
+    </main>
+
+
+    <!-- =====================================================
+         TRACK PAGE JAVASCRIPT
+         ===================================================== -->
+
+    <script>
+
+        const trackForm =
+            document.getElementById("trackForm");
+
+        const trackingResult =
+            document.getElementById("trackingResult");
+
+        const emptyState =
+            document.getElementById("emptyState");
+
+
+        if (trackForm) {
+
+            trackForm.addEventListener("submit", (event) => {
+
+                event.preventDefault();
+
+                const issueId =
+                    document
+                        .getElementById("issueId")
+                        .value
+                        .trim();
+
+                if (!issueId) {
+
+                    return;
+
+                }
+
+
+                /*
+                 * Temporary frontend demonstration.
+                 *
+                 * Later, this section will be replaced with
+                 * a Flask API request that searches the database
+                 * using the complaint ID.
+                 */
+
+                trackingResult.classList.add("visible");
+
+                emptyState.style.display = "none";
+
+            });
+
+        }
+
+    </script>
+
+</body>
+
+</html>
