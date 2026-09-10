@@ -1,5 +1,9 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
+
+import os
+import uuid
+from werkzeug.utils import secure_filename
 
 from database import create_tables
 from auth import register_user, login_user
@@ -16,6 +20,13 @@ app = Flask(__name__)
 
 # Allow frontend to communicate with Flask
 CORS(app)
+# Upload folder for complaint images
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 # Create database tables when the application starts
@@ -113,28 +124,64 @@ def login():
 
 @app.route("/api/reports", methods=["POST"])
 def submit_report():
-    data = request.get_json()
+    # Get text fields from multipart/form-data
+    user_id = request.form.get("user_id")
+    title = request.form.get("title")
+    category = request.form.get("category")
+    description = request.form.get("description")
+    latitude = request.form.get("latitude")
+    longitude = request.form.get("longitude")
+    address = request.form.get("address")
 
-    if not data:
-        return jsonify({
-            "success": False,
-            "message": "Request body is required"
-        }), 400
-
-    user_id = data.get("user_id")
-    title = data.get("title")
-    category = data.get("category")
-    description = data.get("description")
-    latitude = data.get("latitude")
-    longitude = data.get("longitude")
-    address = data.get("address")
-
+    # Validate required fields
     if not title or not category or not description:
         return jsonify({
             "success": False,
             "message": "Title, category and description are required"
         }), 400
 
+    # Handle image upload
+    image_filename = None
+    image = request.files.get("issueImage")
+
+    if image and image.filename:
+
+        # Allowed image types
+        allowed_extensions = {
+            "jpg",
+            "jpeg",
+            "png",
+            "webp"
+        }
+
+        original_filename = secure_filename(image.filename)
+
+        if "." not in original_filename:
+            return jsonify({
+                "success": False,
+                "message": "Invalid image file"
+            }), 400
+
+        extension = original_filename.rsplit(".", 1)[1].lower()
+
+        if extension not in allowed_extensions:
+            return jsonify({
+                "success": False,
+                "message": "Only JPG, JPEG, PNG and WEBP images are allowed"
+            }), 400
+
+        # Create a unique filename
+        image_filename = f"{uuid.uuid4().hex}.{extension}"
+
+        # Save image
+        image.save(
+            os.path.join(
+                app.config["UPLOAD_FOLDER"],
+                image_filename
+            )
+        )
+
+    # Create report
     report_id = create_report(
         user_id=user_id,
         title=title,
@@ -142,14 +189,15 @@ def submit_report():
         description=description,
         latitude=latitude,
         longitude=longitude,
-        address=address
+        address=address,
+        image_filename=image_filename
     )
 
     if report_id is None:
         return jsonify({
             "success": False,
-            "message": "Could not create report"
-        }), 400
+            "message": "Failed to submit report"
+        }), 500
 
     return jsonify({
         "success": True,
@@ -157,31 +205,12 @@ def submit_report():
         "report_id": report_id
     }), 201
 
-
-@app.route("/api/reports", methods=["GET"])
-def fetch_reports():
-    reports = get_reports()
-
-    return jsonify({
-        "success": True,
-        "reports": reports
-    }), 200
-
-
-@app.route("/api/reports/<int:report_id>", methods=["GET"])
-def fetch_single_report(report_id):
-    report = get_single_report(report_id)
-
-    if report is None:
-        return jsonify({
-            "success": False,
-            "message": "Report not found"
-        }), 404
-
-    return jsonify({
-        "success": True,
-        "report": report
-    }), 200
+@app.route("/uploads/<filename>")
+def uploaded_file(filename):
+    return send_from_directory(
+        app.config["UPLOAD_FOLDER"],
+        filename
+    )
 
 
 # ---------------------------------------------------

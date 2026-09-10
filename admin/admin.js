@@ -76,6 +76,13 @@ const detailStatus =
 const currentStatusDisplay =
     document.getElementById("currentStatusDisplay");
 
+// Complaint image
+const detailImage =
+    document.getElementById("detailImage");
+
+const noImageMessage =
+    document.getElementById("noImageMessage");
+
 // Update status button
 const updateStatusBtn =
     document.getElementById("updateStatusBtn");
@@ -213,12 +220,6 @@ async function loadComplaints() {
         showLoadingState();
 
 
-        /*
-         * IMPORTANT:
-         * This is the actual endpoint confirmed
-         * by the backend team.
-         */
-
         const response = await fetch(
             `${API_BASE_URL}/api/admin/reports`
         );
@@ -242,23 +243,6 @@ async function loadComplaints() {
             data
         );
 
-
-        /*
-         * The backend may return either:
-         *
-         * [
-         *   {...},
-         *   {...}
-         * ]
-         *
-         * or:
-         *
-         * {
-         *   reports: [...]
-         * }
-         *
-         * Handle both forms.
-         */
 
         let complaints = data;
 
@@ -439,18 +423,30 @@ function displayComplaints(complaints) {
             complaint.status || "Submitted";
 
 
-        /*
-         * IMPORTANT:
-         *
-         * Backend uses:
-         * address
-         *
-         * NOT:
-         * location
-         */
+        /* -----------------------------------------
+           LOCATION
+           ----------------------------------------- */
 
-        const address =
-            complaint.address || "—";
+        let locationText = "—";
+
+
+        if (
+            complaint.latitude !== null &&
+            complaint.latitude !== undefined &&
+            complaint.longitude !== null &&
+            complaint.longitude !== undefined
+        ) {
+
+            locationText =
+                `${Number(complaint.latitude).toFixed(6)}, ` +
+                `${Number(complaint.longitude).toFixed(6)}`;
+
+        } else if (complaint.address) {
+
+            locationText =
+                complaint.address;
+
+        }
 
 
         row.innerHTML = `
@@ -474,7 +470,7 @@ function displayComplaints(complaints) {
             </td>
 
             <td>
-                ${escapeHTML(address)}
+                ${escapeHTML(locationText)}
             </td>
 
             <td>
@@ -560,11 +556,6 @@ async function openComplaintDetails(complaintId) {
 
     try {
 
-        /*
-         * Use the backend's dedicated
-         * single-report endpoint.
-         */
-
         const response = await fetch(
             `${API_BASE_URL}/api/admin/reports/${complaintId}`
         );
@@ -588,16 +579,6 @@ async function openComplaintDetails(complaintId) {
             data
         );
 
-
-        /*
-         * Handle either:
-         *
-         * { ...complaint }
-         *
-         * or:
-         *
-         * { report: {...} }
-         */
 
         let complaint = data;
 
@@ -632,12 +613,32 @@ async function openComplaintDetails(complaintId) {
             complaint.description || "—";
 
 
-        /*
-         * Backend field is address.
-         */
+        /* -------------------------
+           SHOW LOCATION
+           ------------------------- */
 
-        detailLocation.textContent =
-            complaint.address || "—";
+        if (
+            complaint.latitude !== null &&
+            complaint.latitude !== undefined &&
+            complaint.longitude !== null &&
+            complaint.longitude !== undefined
+        ) {
+
+            detailLocation.textContent =
+                `Latitude: ${Number(complaint.latitude).toFixed(6)} | ` +
+                `Longitude: ${Number(complaint.longitude).toFixed(6)}`;
+
+        } else if (complaint.address) {
+
+            detailLocation.textContent =
+                complaint.address;
+
+        } else {
+
+            detailLocation.textContent =
+                "Location not provided";
+
+        }
 
 
         detailDate.textContent =
@@ -658,6 +659,41 @@ async function openComplaintDetails(complaintId) {
 
             currentStatusDisplay.textContent =
                 status;
+
+        }
+
+
+        /* -------------------------
+           SHOW COMPLAINT IMAGE
+           ------------------------- */
+
+        if (detailImage && noImageMessage) {
+
+            if (complaint.image_filename) {
+
+                detailImage.src =
+                    `${API_BASE_URL}/uploads/${encodeURIComponent(
+                        complaint.image_filename
+                    )}`;
+
+                detailImage.style.display =
+                    "block";
+
+                noImageMessage.style.display =
+                    "none";
+
+            } else {
+
+                detailImage.src =
+                    "";
+
+                detailImage.style.display =
+                    "none";
+
+                noImageMessage.style.display =
+                    "block";
+
+            }
 
         }
 
@@ -825,12 +861,6 @@ async function updateComplaintStatus() {
         }
 
 
-        /*
-         * Actual backend endpoint:
-         *
-         * PUT /api/admin/reports/<id>/status
-         */
-
         const response =
             await fetch(
                 `${API_BASE_URL}/api/admin/reports/${complaintId}/status`,
@@ -869,10 +899,6 @@ async function updateComplaintStatus() {
         }
 
 
-        /*
-         * Backend confirmed successful update.
-         */
-
         selectedComplaint.status =
             newStatus;
 
@@ -893,13 +919,6 @@ async function updateComplaintStatus() {
 
         closeComplaintDetails();
 
-
-        /*
-         * Reload the complaints so that:
-         *
-         * - table status updates
-         * - statistics update
-         */
 
         await loadComplaints();
 
@@ -1168,14 +1187,6 @@ if (logoutBtn) {
     logoutBtn.addEventListener(
         "click",
         function () {
-
-            /*
-             * Admin authentication has not been
-             * defined by the backend yet.
-             *
-             * Therefore we do not invent a
-             * logout/session system here.
-             */
 
             alert(
                 "Admin authentication/logout will be connected when the backend authentication system is finalized."

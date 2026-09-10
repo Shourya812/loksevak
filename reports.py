@@ -12,7 +12,8 @@ def create_report(
     description,
     latitude=None,
     longitude=None,
-    address=None
+    address=None,
+    image_filename=None
 ):
     """
     Create a new civic issue report.
@@ -29,7 +30,8 @@ def create_report(
         description=description,
         latitude=latitude,
         longitude=longitude,
-        address=address
+        address=address,
+        image_filename=image_filename
     )
 
     return report_id

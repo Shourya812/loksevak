@@ -41,6 +41,7 @@ def create_tables():
             latitude REAL,
             longitude REAL,
             address TEXT,
+            image_filename TEXT,
             status TEXT NOT NULL DEFAULT 'Submitted',
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id)
@@ -70,6 +71,15 @@ def create_tables():
         cursor.execute(
             "INSERT OR IGNORE INTO categories (name) VALUES (?)",
             (category,)
+        )
+
+    # Add image_filename column to existing databases
+    cursor.execute("PRAGMA table_info(reports)")
+    columns = [column["name"] for column in cursor.fetchall()]
+
+    if "image_filename" not in columns:
+        cursor.execute(
+            "ALTER TABLE reports ADD COLUMN image_filename TEXT"
         )
 
     connection.commit()
@@ -124,7 +134,8 @@ def add_report(
     description,
     latitude=None,
     longitude=None,
-    address=None
+    address=None,
+    image_filename=None
 ):
     """Add a civic issue report."""
 
@@ -133,8 +144,8 @@ def add_report(
 
     cursor.execute("""
         INSERT INTO reports
-        (user_id, title, category, description, latitude, longitude, address)
-        VALUES (?, ?, ?, ?, ?, ?, ?)
+        (user_id, title, category, description, latitude, longitude, address,image_filename)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     """, (
         user_id,
         title,
@@ -142,7 +153,8 @@ def add_report(
         description,
         latitude,
         longitude,
-        address
+        address,
+        image_filename
     ))
 
     connection.commit()
